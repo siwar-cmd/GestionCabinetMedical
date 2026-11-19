@@ -25,3 +25,4 @@ class Specialty(models.Model):
    
 
 
+git remote add origin TON_LIEN_GITHUB
