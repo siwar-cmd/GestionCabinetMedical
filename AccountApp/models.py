@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinLengthValidator,MaxLengthvalidator,Regexvalidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 class User(AbstractUser):
     pass
-number_validator=Regexvalidator(regex=r'^\d{8}$',message="le numero de telephone doit contenir 8 chiffres")
+number_validator=RegexValidator(regex=r'^\d{8}$',message="le numero de telephone doit contenir 8 chiffres")
 def birth_date_validator(d):
     if d>=timezone.localdate():
         raise ValidationError("la date de naissance doit etre inferieure a la date d'aujourd'hui")
@@ -15,7 +15,7 @@ class Doctor (User):
     Specialities= models.ManyToManyField("AccountApp.Specialty",related_name="doctors")
 
 class Patient (User): 
-    national_id=models.CharField(max_Length=8,unique=True,validators=[number_validator])
+    national_id = models.CharField(max_length=8, unique=True, validators=[number_validator])
     phone= models.CharField(max_length=8,validators=[number_validator])
     birth_date=models.DateField(birth_date_validator)
 class Specialty(models.Model):
@@ -25,4 +25,3 @@ class Specialty(models.Model):
    
 
 
-git remote add origin TON_LIEN_GITHUB
